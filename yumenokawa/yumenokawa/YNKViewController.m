@@ -110,6 +110,9 @@
 }
 -(void)setRemoteControllable
 {
+    AudioSessionInitialize (NULL, NULL, NULL, NULL);
+//    AudioSessionSetActive(true);
+
 	UInt32 category = kAudioSessionCategory_MediaPlayback;
 	AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
 	AudioSessionSetActive(true);
@@ -117,6 +120,10 @@
     [self becomeFirstResponder];
 }
 
+-(BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
 
 - (void)remoteControlReceivedWithEvent:(UIEvent *)event {
     NSLog(@"remoteControlReceivedWithEvent");
